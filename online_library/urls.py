@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from book_catalog.views import IndexView
 
 
 app_name = 'online_library'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', IndexView.as_view(), name='index'),
+    path('', include(('book_catalog.urls', 'book_catalog'), namespace='book_catalog')),
 ]
