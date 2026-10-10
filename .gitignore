@@ -1,0 +1,29 @@
+# Віртуальне середовище (що б воно не займало сотні МБ)
+venv/
+.venv/
+ENV/
+env/
+
+# Байкод та кєш Python (автоматично згенеровані файли)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# База даних та медіа-файли користувачів (локальні дані)
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# Секретні змінні та конфігурації (ключі доступу, паролі)
+.env
+.env.local
+
+# Налаштування редактора коду VS Code
+.vscode/
+
+# Системні файли Windows та macOS
+Thumbs.db
+Desktop.ini
+.DS_Store

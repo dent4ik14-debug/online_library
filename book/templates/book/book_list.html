@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <section>
+        <h1>Каталог</h1>
+        <p>Каталог книжок</p>
+        <a href="{% url 'index' %}">Перейти до домашньої сторінки</a>
+    </section>
+    <section>
+      {% for book in books %}
+        {% if book.for_sale == True %}
+          <h2>{{ book.name }}</h2>
+          <img>
+          <p>{{ book.price }}</p>
+          <a href="#">Додати до кошику</a>
+        {% endif %}
+      {% endfor %}
+    </section>
+    <section>
+        <a href="#">Профіль</a>
+    </section>
+  </body>
+  <footer>
+    <p>Номер телефону: +360639660508</p>
+    <p>email-адреса:dent4ik14@gmail.com</p>
+    <p>telegram:@Denes_Solom; @G0nh1k</p>
+  </footer>
+</html>
