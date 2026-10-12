@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from book_catalog.views import IndexView
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'online_library'
 
@@ -26,3 +27,6 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('', include(('book_catalog.urls', 'book_catalog'), namespace='book_catalog')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

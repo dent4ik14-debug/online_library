@@ -12,15 +12,28 @@
       <a href="{% url 'index' %}">Перейти до домашньої сторінки</a>
     </section>
     <section>
-      {% for book in object_list %} {% if book.for_sale == True %}
-      <a href="#">{{ book.name }}</a>
-      <img />
-      <p>{{ book.price }}</p>
-      <a href="#">Додати до кошику</a>
-      {% endif %} {% endfor %}
+      <a href="#">Профіль</a>
+    </section>
+    <section> 
+      <h1>
+        {% if curent_category %}
+        Категорія: {{ curent_category.name }}
+        {% else %}
+        Всі Категорія
+        {% endif %}
+      </h1>
+      <a href="{% url 'book_catalog:catalog' %}">Всі категорії</a>
+      {% for category in categories %}
+      <a href="{% url 'book_catalog:catalog' %}?category_id={{ category.id }}">{{ category.name }}</a>
+      {% endfor %}
     </section>
     <section>
-      <a href="#">Профіль</a>
+      {% for book in object_list %}
+      <div><a href="{% url 'book_catalog:book_detail' book.id %}">{{ book.name }}</a></div>
+      <img src="{{ book.image.url }}" style="max-width: 300px; max-height: 200px; width: auto; height: auto;"/>
+      <p>{{ book.price }}</p>
+      <a href="#">Додати до кошику<br></a>
+      {% endfor %}
     </section>
   </body>
   <footer>

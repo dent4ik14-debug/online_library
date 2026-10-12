@@ -13,7 +13,7 @@ class Book(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(upload_to='books_images/', null=True, blank=True)
     for_sale = models.BooleanField(default=True)
     category = models.ForeignKey(to=BookCategory, on_delete=models.CASCADE)
 

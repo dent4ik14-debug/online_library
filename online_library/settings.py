@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -127,3 +127,9 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+# URL, за яким зображення будуть доступні в браузері (наприклад, /media/books_images/cover.jpg)
+MEDIA_URL = '/media/'
+
+# Абсолютний шлях до папки на диску, де Django зберігатиме завантажені файли
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
