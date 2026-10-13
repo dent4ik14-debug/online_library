@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
     path('', include(('book_catalog.urls', 'book_catalog'), namespace='book_catalog')),
+    path('', include(('users.urls', 'users'), namespace='users')),
 ]
 
 if settings.DEBUG:

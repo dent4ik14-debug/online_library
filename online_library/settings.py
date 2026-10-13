@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'book_catalog'
+    'book_catalog',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,8 @@ MEDIA_URL = '/media/'
 
 # Абсолютний шлях до папки на диску, де Django зберігатиме завантажені файли
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
