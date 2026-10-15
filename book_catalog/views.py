@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
-from book_catalog.models import Book, BookCategory
+from book_catalog.models import Book, BookCategory, Basket
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+
 
 class IndexView(TemplateView):
     template_name = 'book/index.html'
@@ -35,3 +38,24 @@ class BookListView(ListView):
         if category_id and category_id.isdigit():
             context['curent_category'] = BookCategory.objects.filter(id=category_id).first()
         return context
+
+
+@login_required
+def basket_add(request, book_id):
+    book = Book.objects.get(id=book_id)
+    baskets = Basket.objects.filter(user=request.user, book=book)
+    if not baskets.exists():
+        Basket.objects.create(user=request.user, book=book, quantity=1)
+    else:
+        basket = baskets.first()
+        basket.quantity += 1
+        basket.save()
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def basket_remove(request, basket_id):
+    basket = Basket.objects.get(id=basket_id)
+    basket.delete()
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])

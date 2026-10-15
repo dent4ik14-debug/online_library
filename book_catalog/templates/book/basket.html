@@ -1,0 +1,40 @@
+{% if baskets %}
+<h4>
+    Корзина <span>{{ baskets.total_quantity }}</span>
+</h4>
+{% for basket in baskets %}
+    <div>
+        <h5>{{ basket.book.name }}</h5>
+        <p>{{ basket.book.description }}</p>
+    </div>
+
+<div>
+    <ul>
+        <li>
+            <div>
+                <div>
+                    <input name="basketID" type="number"
+                           value="{{ basket.quantity }}" min="0">
+                </div>
+                <div>{{ basket.book.price }}</div>
+                <div>
+                    <a href="{% url 'book_catalog:basket_remove' basket.id %}">
+                        <i></i>
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+{% endfor %}
+<div>
+    <div>
+        <p>Итого</p>
+        <h4>{{ baskets.total_sum }} грн.</h4>
+    </div>
+</div>
+{% else %}
+<h4>
+    Корзина пуста
+</h4>
+{% endif %}

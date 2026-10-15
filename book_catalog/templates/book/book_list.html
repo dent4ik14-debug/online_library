@@ -43,7 +43,7 @@
       <div><a href="{% url 'book_catalog:book_detail' book.id %}">{{ book.name }}</a></div>
       <img src="{{ book.image.url }}" style="max-width: 300px; max-height: 200px; width: auto; height: auto;"/>
       <p>{{ book.price }}</p>
-      <a href="#">Додати до кошику<br></a>
+      <a href="{% url 'book_catalog:basket_add' book.id %}">Додати до кошику<br></a>
       {% endfor %}
     </section>
   </body>

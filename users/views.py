@@ -4,6 +4,7 @@ from django.views.generic import CreateView, DetailView
 from users.forms import CustomUserCreationForm
 from users.models import CustomUser
 from django.contrib.auth.mixins import LoginRequiredMixin
+from book_catalog.models import Basket
 # Create your views here.
 
 class CustomLoginView(LoginView):
@@ -24,3 +25,8 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        context['baskets'] = Basket.objects.filter(user=self.object)
+        return context

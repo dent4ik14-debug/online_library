@@ -1,5 +1,5 @@
 from django.db import models
-
+from users.models import CustomUser
 # Create your models here.
 class BookCategory(models.Model):
     name = models.CharField(max_length=128)
@@ -19,3 +19,26 @@ class Book(models.Model):
 
     def __str__(self):
         return f'Назва:{self.name}'
+
+    
+class BasketQuerySet(models.query.QuerySet):
+    def total_sum(self):
+        return sum(basket.sum() for basket in self)
+
+    def total_quantity(self):
+        return sum(basket.quantity for basket in self)
+
+
+class Basket(models.Model):
+    user = models.ForeignKey(to=CustomUser, on_delete=models.CASCADE)
+    book = models.ForeignKey(to=Book, on_delete=models.CASCADE)
+    quantity = models.PositiveSmallIntegerField(default=0)
+    quantity = models.PositiveSmallIntegerField(default=0)
+
+    objects = BasketQuerySet.as_manager()
+
+    def __str__(self):
+        return f"Корзина для {self.user.email} | Продукт: {self.product.name}"
+
+    def sum(self):
+        return self.quantity * self.book.price
