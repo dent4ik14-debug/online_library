@@ -1,6 +1,6 @@
 {% if baskets %}
 <h4>
-    Корзина <span>{{ baskets.total_quantity }}</span>
+    Загалом товару в Корзині <span>{{ baskets.total_quantity }}</span>
 </h4>
 {% for basket in baskets %}
     <div>
@@ -12,11 +12,7 @@
     <ul>
         <li>
             <div>
-                <div>
-                    <input name="basketID" type="number"
-                           value="{{ basket.quantity }}" min="0">
-                </div>
-                <div>{{ basket.book.price }}</div>
+                <div>{{ basket.quantity }} | {{ basket.book.price }}</div>
                 <div>
                     <a href="{% url 'book_catalog:basket_remove' basket.id %}">
                         <i></i>
@@ -29,12 +25,12 @@
 {% endfor %}
 <div>
     <div>
-        <p>Итого</p>
+        <p>Загалом</p>
         <h4>{{ baskets.total_sum }} грн.</h4>
     </div>
 </div>
 {% else %}
 <h4>
-    Корзина пуста
+    Ви ще нічого не додали до Корзини
 </h4>
 {% endif %}

@@ -3,7 +3,7 @@ venv/
 .venv/
 ENV/
 env/
-
+.env
 # Байкод та кєш Python (автоматично згенеровані файли)
 __pycache__/
 *.pyc

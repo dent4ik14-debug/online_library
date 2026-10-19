@@ -8,7 +8,6 @@
   <body>
     <section>
       {% if user.is_authenticated %}
-      <a href="{% url 'users:profile' %}">Профіль</a>
       <form action="{% url 'users:logout' %}" method="post" style="display: inline;">
         {% csrf_token %}
         <button type="submit" class="btn btn-link" style="padding: 0; border: none; background: none;">
@@ -19,6 +18,8 @@
       <a href="{% url 'users:login' %}">Увійти</a>
       <a href="{% url 'users:register' %}">Зареєструватись</a>
       {% endif %}
+      <a href="{% url 'book_catalog:catalog' %}">Перейти до каталогу</a>
+      <a href="{% url 'index' %}">Перейти до домашньої сторінки</a>
     <section>
         <h2>Username: {{ profile.username }}</h2>
         <h2>Ім'я: {{ profile.first_name }}</h2>
