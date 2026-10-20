@@ -1,0 +1,40 @@
+{% load static %}
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Оформлення замовлення</title>
+    <link rel="stylesheet" href="{% static 'users/css/auth.css' %}">
+  </head>
+  <body>
+    <div class="auth-card profile-card">
+      <nav class="top-nav">
+        <a href="{% url 'book_catalog:catalog' %}">Назад до каталогу</a>
+        <a href="{% url 'index' %}">Головна</a>
+      </nav>
+
+      <h1>Оформлення замовлення</h1>
+
+      <!-- Огляд кошика -->
+      <div style="background-color: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 24px; border: 1px solid #e9ecef;">
+        <h3 style="margin-top: 0;">Ваше замовлення</h3>
+        <p style="margin: 4px 0; font-size: 15px;">Загальна кількість товарів: <strong>{{ baskets.total_quantity }}</strong></p>
+        <p style="margin: 4px 0; font-size: 18px; color: #198754;">До сплати: <strong>{{ baskets.total_sum }} грн.</strong></p>
+      </div>
+
+      <!-- Форма збоку/внизу -->
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="margin-top: 16px;">Перейти до оплати Monobank</button>
+      </form>
+    </div>
+
+    <footer>
+      <p>Номер телефону: +360639660508</p>
+      <p>email-адреса: dent4ik14@gmail.com</p>
+      <p>telegram: @Denes_Solom; @G0nh1k</p>
+    </footer>
+  </body>
+</html>

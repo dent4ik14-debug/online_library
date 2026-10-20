@@ -37,10 +37,37 @@
         {% endif %}
       </h1>
 
+      <form method="get" action="{% url 'book_catalog:catalog' %}" class="search-sort-form" style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+        <!-- Поле пошуку -->
+        <input 
+          type="text" 
+          name="q" 
+          value="{{ request.GET.q|default:'' }}" 
+          placeholder="Пошук за назвою або описом..." 
+          style="flex: 1; min-width: 200px; padding: 10px 14px; border: 1px solid #ced4da; border-radius: 6px; font-size: 15px;"
+        >
+
+        {% if request.GET.category_id %}
+          <input type="hidden" name="category_id" value="{{ request.GET.category_id }}">
+        {% endif %}
+
+        <select name="sort_by" onchange="this.form.submit()" style="padding: 10px 14px; border: 1px solid #ced4da; border-radius: 6px; font-size: 15px; background-color: #fff;">
+          <option value="">Сортувати за...</option>
+          <option value="price_asc" {% if request.GET.sort_by == 'price_asc' %}selected{% endif %}>Від дешевших до дорожчих</option>
+          <option value="price_desc" {% if request.GET.sort_by == 'price_desc' %}selected{% endif %}>Від дорожчих до дешевших</option>
+          <option value="newest" {% if request.GET.sort_by == 'newest' %}selected{% endif %}>Спочатку нові</option>
+        </select>
+
+        <button type="submit" class="btn-add-basket" style="padding: 10px 20px;">Шукати</button>
+      </form>
+
       <div class="categories-bar">
         <a href="{% url 'book_catalog:catalog' %}" class="{% if not curent_category %}active{% endif %}">Всі категорії</a>
         {% for category in categories %}
-          <a href="{% url 'book_catalog:catalog' %}?category_id={{ category.id }}">{{ category.name }}</a>
+          <!-- Зберігаємо параметри пошуку/сортів при кліку на категорію -->
+          <a href="{% url 'book_catalog:catalog' %}?category_id={{ category.id }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.sort_by %}&sort_by={{ request.GET.sort_by }}{% endif %}">
+            {{ category.name }}
+          </a>
         {% endfor %}
       </div>
 
@@ -52,6 +79,10 @@
             <div class="book-price">{{ book.price }} грн.</div>
             <a href="{% url 'book_catalog:basket_add' book.id %}" class="btn-add-basket">Додати до кошику</a>
           </div>
+        {% empty %}
+          <p style="grid-column: 1 / -1; text-align: center; font-size: 18px; color: #6c757d; margin: 40px 0;">
+            За вашим запитом книжок не знайдено.
+          </p>
         {% endfor %}
       </section>
     </main>

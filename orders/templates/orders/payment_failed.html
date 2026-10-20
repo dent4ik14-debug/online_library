@@ -1,0 +1,26 @@
+{% load static %}
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Помилка оплати</title>
+    <link rel="stylesheet" href="{% static 'users/css/email.css' %}">
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="alert alert-danger" style="text-align: center;">
+        <h2>Помилка під час оплати ❌</h2>
+        <p>Не вдалося провести платіж або процедуру було скасовано.</p>
+        <p style="margin-top: 20px;">
+          <a href="{% url 'book_catalog:catalog' %}" class="btn btn-primary">Повернутися до каталогу</a>
+        </div>
+    </div>
+
+    <footer>
+      <p>Номер телефону: +360639660508</p>
+      <p>email-адреса: dent4ik14@gmail.com</p>
+      <p>telegram: @Denes_Solom; @G0nh1k</p>
+    </footer>
+  </body>
+</html>

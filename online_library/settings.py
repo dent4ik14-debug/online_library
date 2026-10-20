@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     'book_catalog',
     'users',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -157,3 +158,5 @@ STATICFILES_DIRS = [
 
 # Папка, куди збиратиметься вся статика під час collectstatic (для продакшену)
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MONO_API_TOKEN = os.getenv('MONO_API_TOKEN')

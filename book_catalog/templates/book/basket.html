@@ -18,6 +18,14 @@
       <p style="margin: 0; font-weight: 600;">Загальна сума:</p>
       <h4 style="margin: 0; color: #198754;">{{ baskets.total_sum }} грн.</h4>
     </div>
+
+    <!-- КНОПКА ПЕРЕХОДУ ДО ОФОРМЛЕННЯ ТА ОПЛАТИ -->
+    <div style="margin-top: 20px; text-align: center;">
+      <a href="{% url 'orders:order_create' %}" class="btn-add-basket" style="display: block; width: 100%; text-decoration: none; box-sizing: border-box;">
+        Оформити замовлення
+      </a>
+    </div>
+
   {% else %}
     <h4>Ви ще нічого не додали до корзини</h4>
   {% endif %}

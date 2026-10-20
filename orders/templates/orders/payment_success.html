@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Оплата успішна</title>
+    <link rel="stylesheet" href="{% static 'users/css/email.css' %}">
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="alert alert-success" style="text-align: center;">
+        <h2>Дякуємо! Замовлення успішно оплачено 🎉</h2>
+        <p>Ми вже обробляємо ваше замовлення та готуємо книги до відправки.</p>
+        <p style="margin-top: 20px;">
+          <a href="{% url 'book_catalog:catalog' %}" class="btn btn-primary">Повернутися до каталогу</a>
+          <a href="{% url 'users:profile' %}" class="btn" style="background-color: #6c757d; color: #fff; margin-left: 8px;">До профілю</a>
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <p>Номер телефону: +360639660508</p>
+      <p>email-адреса: dent4ik14@gmail.com</p>
+      <p>telegram: @Denes_Solom; @G0nh1k</p>
+    </footer>
+  </body>
+</html>
