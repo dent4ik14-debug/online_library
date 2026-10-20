@@ -1,27 +1,40 @@
+{% load static %}
 <!doctype html>
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'book_catalog/css/books.css' %}">
   </head>
   <body>
-    <section>
-      <h1>Книга</h1>
-      <a href="{% url 'index' %}">Перейти до домашньої сторінки</a>
-      <a href="{% url 'book_catalog:catalog' %}">Перейти до каталогу</a>
-    </section>
-    <section>
-      <div><h1 href="#">{{ book.name }}</h1></div>
-      <img src="{{ book.image.url }}" style="max-width: 300px; max-height: 200px; width: auto; height: auto;"/>
-      <p>{{ book.price }}</p>
-      <p>{{ book.description }}</p>
-      <a href="#">Додати до кошику<br></a>
-    </section>
+    <header class="site-header">
+      <div class="nav-wrapper">
+        <div class="nav-links">
+          <a href="{% url 'index' %}">Головна</a>
+          <a href="{% url 'book_catalog:catalog' %}">Каталог</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <div class="book-detail-card">
+        <div>
+          <img src="{{ book.image.url }}" alt="{{ book.name }}" />
+        </div>
+        <div class="book-detail-info">
+          <h1>{{ book.name }}</h1>
+          <div class="price">{{ book.price }} грн.</div>
+          <p class="description">{{ book.description }}</p>
+          <a href="{% url 'book_catalog:basket_add' book.id %}" class="btn-add-basket">Додати до кошику</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Номер телефону: +360639660508</p>
+      <p>email-адреса: dent4ik14@gmail.com</p>
+      <p>telegram: @Denes_Solom; @G0nh1k</p>
+    </footer>
   </body>
-  <footer>
-    <p>Номер телефону: +360639660508</p>
-    <p>email-адреса:dent4ik14@gmail.com</p>
-    <p>telegram:@Denes_Solom; @G0nh1k</p>
-  </footer>
 </html>

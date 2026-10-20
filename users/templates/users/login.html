@@ -1,26 +1,36 @@
+{% load static %}
 <!doctype html>
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Логін</title>
+    <title>Вхід</title>
+    <link rel="stylesheet" href="{% static 'user/css/auth.css' %}">
   </head>
   <body>
-    <section>
+    <div class="auth-card">
+      <nav class="top-nav">
+        <a href="{% url 'index' %}">Головна</a>
+        <a href="{% url 'book_catalog:catalog' %}">Каталог</a>
+      </nav>
+
       <h1>Вхід</h1>
-      <a href="{% url 'index' %}">Перейти до домашньої сторінки</a>
-      <a href="{% url 'book_catalog:catalog' %}">Перейти до каталогу</a>
-    </section>
-    <form method="post">
+
+      <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-    <button type="submit">Увійти</button>
-    </form>
-    <p>Немає Акаунту? <a href="{% url 'users:register' %}">Зареєструватись</a></p>
+        <button type="submit">Увійти</button>
+      </form>
+
+      <p class="auth-switch">
+        Немає акаунту? <a href="{% url 'users:register' %}">Зареєструватись</a>
+      </p>
+    </div>
+
+    <footer>
+      <p>Номер телефону: +360639660508</p>
+      <p>email-адреса: dent4ik14@gmail.com</p>
+      <p>telegram: @Denes_Solom; @G0nh1k</p>
+    </footer>
   </body>
-  <footer>
-    <p>Номер телефону: +360639660508</p>
-    <p>email-адреса:dent4ik14@gmail.com</p>
-    <p>telegram:@Denes_Solom; @G0nh1k</p>
-  </footer>
 </html>

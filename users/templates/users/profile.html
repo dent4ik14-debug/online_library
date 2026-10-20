@@ -1,38 +1,46 @@
+{% load static %}
 <!doctype html>
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Профіль</title>
+    <link rel="stylesheet" href="{% static 'user/css/auth.css' %}">
   </head>
   <body>
-    <section>
-      {% if user.is_authenticated %}
-      <form action="{% url 'users:logout' %}" method="post" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-link" style="padding: 0; border: none; background: none;">
-          Вийти
-        </button>
-      </form>
-      {% else %}
-      <a href="{% url 'users:login' %}">Увійти</a>
-      <a href="{% url 'users:register' %}">Зареєструватись</a>
-      {% endif %}
-      <a href="{% url 'book_catalog:catalog' %}">Перейти до каталогу</a>
-      <a href="{% url 'index' %}">Перейти до домашньої сторінки</a>
-    <section>
+    <div class="auth-card profile-card">
+      <nav class="top-nav">
+        {% if user.is_authenticated %}
+          <form action="{% url 'users:logout' %}" method="post" style="display: inline; margin: 0;">
+            {% csrf_token %}
+            <button type="submit" class="btn-link" style="background: none; border: none; padding: 0;">
+              Вийти
+            </button>
+          </form>
+        {% else %}
+          <a href="{% url 'users:login' %}">Увійти</a>
+          <a href="{% url 'users:register' %}">Зареєструватись</a>
+        {% endif %}
+        <a href="{% url 'book_catalog:catalog' %}">Каталог</a>
+        <a href="{% url 'index' %}">Головна</a>
+      </nav>
+
+      <section class="profile-info">
         <h2>Username: {{ profile.username }}</h2>
         <h2>Ім'я: {{ profile.first_name }}</h2>
         <h2>Фамілія: {{ profile.last_name }}</h2>
         <h2>Email: {{ profile.email }}</h2>
-    </section>
-    <div>   
-      {% include 'book/basket.html' %}
+      </section>
+
+      <div>   
+        {% include 'book/basket.html' %}
+      </div>
     </div>
+
+    <footer>
+      <p>Номер телефону: +360639660508</p>
+      <p>email-адреса: dent4ik14@gmail.com</p>
+      <p>telegram: @Denes_Solom; @G0nh1k</p>
+    </footer>
   </body>
-  <footer>
-    <p>Номер телефону: +360639660508</p>
-    <p>email-адреса:dent4ik14@gmail.com</p>
-    <p>telegram:@Denes_Solom; @G0nh1k</p>
-  </footer>
 </html>

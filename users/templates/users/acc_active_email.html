@@ -1,8 +1,10 @@
-<h2>Вітаємо, {{ user.username }}!</h2>
-<p>Дякуємо за реєстрацію на нашому сайті.</p>
-<p>Будь ласка, натисніть на посилання нижче для підтвердження вашої email адреси:</p>
-<p>
-    <a href="http://{{ domain }}{% url 'users:activate' uidb64=uid token=token %}">
-        Підтвердити Email
-    </a>
-</p>
+<div class="email-container">
+    <h2>Вітаємо, {{ user.username }}!</h2>
+    <p>Дякуємо за реєстрацію на нашому сайті.</p>
+    <p>Будь ласка, натисніть на посилання нижче для підтвердження вашої email адреси:</p>
+    <p>
+        <a href="http://{{ domain }}{% url 'users:activate' uidb64=uid token=token %}">
+            Підтвердити Email
+        </a>
+    </p>
+</div>

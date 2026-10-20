@@ -1,36 +1,24 @@
-{% if baskets %}
-<h4>
-    Загалом товару в Корзині <span>{{ baskets.total_quantity }}</span>
-</h4>
-{% for basket in baskets %}
-    <div>
-        <h5>{{ basket.book.name }}</h5>
-        <p>{{ basket.book.description }}</p>
-    </div>
+<div class="basket-container">
+  {% if baskets %}
+    <h4>Загалом товару в корзині: <span>{{ baskets.total_quantity }}</span></h4>
+    
+    {% for basket in baskets %}
+      <div class="basket-item">
+        <div class="basket-item-info">
+          <h5>{{ basket.book.name }}</h5>
+          <p>Кількість: {{ basket.quantity }} | Ціна: {{ basket.book.price }} грн.</p>
+        </div>
+        <div>
+          <a href="{% url 'book_catalog:basket_remove' basket.id %}" class="btn-remove-item" title="Видалити">✕</a>
+        </div>
+      </div>
+    {% endfor %}
 
-<div>
-    <ul>
-        <li>
-            <div>
-                <div>{{ basket.quantity }} | {{ basket.book.price }}</div>
-                <div>
-                    <a href="{% url 'book_catalog:basket_remove' basket.id %}">
-                        <i></i>
-                    </a>
-                </div>
-            </div>
-        </li>
-    </ul>
-</div>
-{% endfor %}
-<div>
-    <div>
-        <p>Загалом</p>
-        <h4>{{ baskets.total_sum }} грн.</h4>
+    <div class="basket-total">
+      <p style="margin: 0; font-weight: 600;">Загальна сума:</p>
+      <h4 style="margin: 0; color: #198754;">{{ baskets.total_sum }} грн.</h4>
     </div>
+  {% else %}
+    <h4>Ви ще нічого не додали до корзини</h4>
+  {% endif %}
 </div>
-{% else %}
-<h4>
-    Ви ще нічого не додали до Корзини
-</h4>
-{% endif %}

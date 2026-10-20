@@ -1,34 +1,42 @@
+{% load static %}
 <!doctype html>
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'book_catalog/css/books.css' %}">
   </head>
   <body>
-    <section>
+    <header class="site-header">
+      <div class="nav-wrapper">
+        <div class="nav-links">
+          <a href="{% url 'book_catalog:catalog' %}">Каталог книжок</a>
+        </div>
+        <div class="nav-user">
+          {% if user.is_authenticated %}
+            <a href="{% url 'users:profile' %}">Профіль</a>
+            <form action="{% url 'users:logout' %}" method="post" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn-link" style="padding: 0; border: none; background: none;">Вийти</button>
+            </form>
+          {% else %}
+            <a href="{% url 'users:login' %}">Увійти</a>
+            <a href="{% url 'users:register' %}">Зареєструватись</a>
+          {% endif %}
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container">
       <h1>Домашня сторінка</h1>
-      <p>Домашня сторінка нашої онлайн бібліотеки</p>
-      <a href="{% url 'book_catalog:catalog' %}">Перейти до каталогу</a>
-    </section>
-    <section>
-      {% if user.is_authenticated %}
-      <a href="{% url 'users:profile' %}">Профіль</a>
-      <form action="{% url 'users:logout' %}" method="post" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-link" style="padding: 0; border: none; background: none;">
-          Вийти
-        </button>
-      </form>
-      {% else %}
-      <a href="{% url 'users:login' %}">Увійти</a>
-      <a href="{% url 'users:register' %}">Зареєструватись</a>
-      {% endif %}
-    </section>
+      <p>Ласкаво просимо до нашої онлайн бібліотеки!</p>
+    </main>
+
+    <footer>
+      <p>Номер телефону: +360639660508</p>
+      <p>email-адреса: dent4ik14@gmail.com</p>
+      <p>telegram: @Denes_Solom; @G0nh1k</p>
+    </footer>
   </body>
-  <footer>
-    <p>Номер телефону: +360639660508</p>
-    <p>email-адреса:dent4ik14@gmail.com</p>
-    <p>telegram:@Denes_Solom; @G0nh1k</p>
-  </footer>
 </html>

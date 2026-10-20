@@ -146,3 +146,14 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+STATIC_URL = 'static/'
+
+# Вказуємо Django додаткову директорію для пошуку статичних файлів
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+# Папка, куди збиратиметься вся статика під час collectstatic (для продакшену)
+STATIC_ROOT = BASE_DIR / 'staticfiles'

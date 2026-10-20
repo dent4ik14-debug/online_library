@@ -7,5 +7,5 @@ urlpatterns = [
     path('catalog/', BookListView.as_view(), name='catalog'),
     path('book/<int:pk>/', AboutBookView.as_view(), name='book_detail'),
     path('basket/add/<int:book_id>/', basket_add, name='basket_add'),
-    path('basket/remove/<int:book_id>/', basket_remove, name='basket_remove')
+    path('basket/remove/<int:basket_id>/', basket_remove, name='basket_remove')
 ]
