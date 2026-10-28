@@ -30,7 +30,6 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com', '.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
-    'cloudinary_storage', # МУСИТЬ бути ВИЩЕ за staticfiles
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'orders',
 
+    'cloudinary_storage',
     'cloudinary',
 ]
 
@@ -166,6 +166,15 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 MONO_API_TOKEN = os.getenv('MONO_API_TOKEN')
+
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
