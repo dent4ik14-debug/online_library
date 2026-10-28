@@ -74,7 +74,13 @@
       <section class="books-grid">
         {% for book in object_list %}
           <div class="book-card">
-            <img src="{{ book.image.url }}" alt="{{ book.name }}" />
+            {% if book.image %}
+              <img src="{{ book.image.url }}" alt="{{ book.name }}" />
+            {% else %}
+              <div class="no-image" style="height: 200px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #6c757d;">
+                Немає обкладинки
+              </div>
+            {% endif %}
             <a href="{% url 'book_catalog:book_detail' book.id %}" class="book-title">{{ book.name }}</a>
             <div class="book-price">{{ book.price }} грн.</div>
             <a href="{% url 'book_catalog:basket_add' book.id %}" class="btn-add-basket">Додати до кошику</a>

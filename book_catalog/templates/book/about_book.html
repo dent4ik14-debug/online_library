@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="{% static 'book_catalog/css/books.css' %}">
+    <link rel="stylesheet" href="{% static 'book_catalog/css/books.css' %}" />
   </head>
   <body>
     <header class="site-header">
@@ -20,13 +20,34 @@
     <main class="main-container">
       <div class="book-detail-card">
         <div>
+          {% if book.image %}
           <img src="{{ book.image.url }}" alt="{{ book.name }}" />
+          {% else %}
+          <div
+            class="no-image"
+            style="
+              height: 300px;
+              background: #f8f9fa;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #6c757d;
+              border-radius: 8px;
+            "
+          >
+            Немає обкладинки
+          </div>
+          {% endif %}
         </div>
         <div class="book-detail-info">
           <h1>{{ book.name }}</h1>
           <div class="price">{{ book.price }} грн.</div>
           <p class="description">{{ book.description }}</p>
-          <a href="{% url 'book_catalog:basket_add' book.id %}" class="btn-add-basket">Додати до кошику</a>
+          <a
+            href="{% url 'book_catalog:basket_add' book.id %}"
+            class="btn-add-basket"
+            >Додати до кошику</a
+          >
         </div>
       </div>
     </main>
